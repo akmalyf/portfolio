@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import Navbar from '@/components/layouts/navbar';
 import Footer from '@/components/layouts/footer';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -33,6 +34,7 @@ export default function RootLayout({
                 {children}
                 <Footer />
                 <SpeedInsights />
+                <Analytics />
             </body>
         </html>
     );
