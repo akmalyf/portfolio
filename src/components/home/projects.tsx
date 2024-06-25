@@ -1,14 +1,10 @@
-export const metadata = {
-    title: 'Sticky Scrolling Effect - Cruip Tutorials',
-    description: 'Page description',
-};
-
 import Image from 'next/image';
 import Illustration01 from '@/public/image/illustration-01.png';
 import Illustration02 from '@/public/image/illustration-02.png';
 import Illustration03 from '@/public/image/illustration-03.png';
 import Illustration04 from '@/public/image/illustration-04.png';
 import StickyScrolling from '@/components/ui/sticky-scrolling';
+import React from 'react';
 
 const Projects = () => {
     const sections = [
@@ -52,7 +48,7 @@ const Projects = () => {
                                         {
                                             '--stick-visibility': 0,
                                             '--stick-scale': 0.8,
-                                        } as any
+                                        } as React.CSSProperties
                                     }
                                 >
                                     <div className='flex flex-col space-y-4 space-y-reverse lg:h-full lg:flex-row lg:space-x-20 lg:space-y-0'>

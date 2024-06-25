@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 type StickyScrollingProps = {
     children: React.ReactNode;
@@ -26,38 +26,18 @@ export default function StickyScrolling({
     const activeIndex = useRef<number>(0);
     const scrollValue = useRef<number>(0);
 
-    useEffect(() => {
-        containerRef.current &&
-            setSections(
-                Array.from(
-                    containerRef.current.querySelectorAll('section')
-                ).map((el) => el as HTMLElement)
-            );
-    }, []);
-
-    useEffect(() => {
-        initContainer();
-        handleSections();
-
-        window.addEventListener('scroll', handleSections);
-
-        return () => {
-            window.removeEventListener('scroll', handleSections);
-        };
-    }, [sections]);
-
-    const initContainer = () => {
+    const initContainer = useCallback(() => {
         if (containerRef.current) {
             containerRef.current.style.setProperty(
                 '--stick-items',
-                `${sections.length + 1}00vh`
+                `${sections.length + 1}00vh`,
             );
             containerRef.current.classList.remove('hidden');
         }
-    };
+    }, [sections.length]);
 
-    const handleSections = () => {
-        if (containerRef.current && sections) {
+    const handleSections = useCallback(() => {
+        if (containerRef.current && sections.length > 0) {
             viewportTop.current = window.scrollY;
             containerProps.current.height = containerRef.current.clientHeight;
             containerProps.current.top = containerRef.current.offsetTop;
@@ -77,7 +57,7 @@ export default function StickyScrolling({
                     containerProps.current.top,
                     containerProps.current.bottom,
                     0,
-                    sections.length + 1
+                    sections.length + 1,
                 );
             }
             activeIndex.current =
@@ -95,7 +75,27 @@ export default function StickyScrolling({
                 }
             });
         }
-    };
+    }, [sections]);
+
+    useEffect(() => {
+        containerRef.current &&
+            setSections(
+                Array.from(
+                    containerRef.current.querySelectorAll('section')
+                ).map((el) => el as HTMLElement)
+            );
+    }, []);
+
+    useEffect(() => {
+        initContainer();
+        handleSections();
+
+        window.addEventListener('scroll', handleSections);
+
+        return () => {
+            window.removeEventListener('scroll', handleSections);
+        };
+    }, [sections, initContainer, handleSections]);
 
     const remapValue = (
         value: number,
