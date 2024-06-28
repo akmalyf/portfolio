@@ -1,5 +1,23 @@
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
+import { PluginCreator } from 'tailwindcss/types/config';
+
+const addVariablesForColors: PluginCreator = ({ addBase, theme }) => {
+    const allColors = flattenColorPalette(theme('colors'));
+
+    // Explicitly type newVars to be an object with string keys and string values
+    const newVars: { [key: string]: string } = Object.fromEntries(
+        Object.entries(allColors).map(([key, val]) => [
+            `--${key}`,
+            val as string,
+        ]),
+    );
+
+    addBase({
+        ':root': newVars,
+    });
+};
 
 const config = {
     darkMode: ['class'],
@@ -50,6 +68,39 @@ const config = {
                         transform: 'translateY(-83.33%)',
                     },
                 },
+                'moveHorizontal': {
+                    '0%': {
+                        transform: 'translateX(-50%) translateY(-10%)',
+                    },
+                    '50%': {
+                        transform: 'translateX(50%) translateY(10%)',
+                    },
+                    '100%': {
+                        transform: 'translateX(-50%) translateY(-10%)',
+                    },
+                },
+                'moveInCircle': {
+                    '0%': {
+                        transform: 'rotate(0deg)',
+                    },
+                    '50%': {
+                        transform: 'rotate(180deg)',
+                    },
+                    '100%': {
+                        transform: 'rotate(360deg)',
+                    },
+                },
+                'moveVertical': {
+                    '0%': {
+                        transform: 'translateY(-50%)',
+                    },
+                    '50%': {
+                        transform: 'translateY(50%)',
+                    },
+                    '100%': {
+                        transform: 'translateY(-50%)',
+                    },
+                },
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
@@ -57,10 +108,15 @@ const config = {
                 'infinite-scroll': 'infinite-scroll 25s linear infinite',
                 'text-rotate':
                     'text-rotate 12.5s cubic-bezier(0.83, 0, 0.12, 1) infinite',
+                'first': 'moveVertical 30s ease infinite',
+                'second': 'moveInCircle 20s reverse infinite',
+                'third': 'moveInCircle 40s linear infinite',
+                'fourth': 'moveHorizontal 40s ease infinite',
+                'fifth': 'moveInCircle 20s ease infinite',
             },
         },
     },
-    plugins: [require('tailwindcss-animate')],
+    plugins: [require('tailwindcss-animate'), addVariablesForColors],
 } satisfies Config;
 
 export default config;
