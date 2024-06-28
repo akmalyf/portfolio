@@ -18,10 +18,7 @@ const Hero = () => {
 
                     <h1 className='bg-gradient-to-r from-slate-200/60 to-slate-200 to-50% bg-clip-text text-5xl font-extrabold leading-normal text-transparent [text-wrap:balance]'>
                         Passionate Full-Stack Developer Creating Innovative
-                        <WordRotate
-                            className="text-indigo-500"
-                            words={words}
-                        />
+                        <WordRotate className="text-indigo-500" words={words} />
                         {/*<FlipWords words={words} className="text-indigo-500"/> <br />*/}
                     </h1>
                     <div className='mx-10 text-lg text-gray-400'>

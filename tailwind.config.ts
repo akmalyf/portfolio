@@ -11,7 +11,7 @@ const addVariablesForColors: PluginCreator = ({ addBase, theme }) => {
         Object.entries(allColors).map(([key, val]) => [
             `--${key}`,
             val as string,
-        ]),
+        ])
     );
 
     addBase({
@@ -68,7 +68,7 @@ const config = {
                         transform: 'translateY(-83.33%)',
                     },
                 },
-                'moveHorizontal': {
+                moveHorizontal: {
                     '0%': {
                         transform: 'translateX(-50%) translateY(-10%)',
                     },
@@ -79,7 +79,7 @@ const config = {
                         transform: 'translateX(-50%) translateY(-10%)',
                     },
                 },
-                'moveInCircle': {
+                moveInCircle: {
                     '0%': {
                         transform: 'rotate(0deg)',
                     },
@@ -90,7 +90,7 @@ const config = {
                         transform: 'rotate(360deg)',
                     },
                 },
-                'moveVertical': {
+                moveVertical: {
                     '0%': {
                         transform: 'translateY(-50%)',
                     },
@@ -108,11 +108,11 @@ const config = {
                 'infinite-scroll': 'infinite-scroll 25s linear infinite',
                 'text-rotate':
                     'text-rotate 12.5s cubic-bezier(0.83, 0, 0.12, 1) infinite',
-                'first': 'moveVertical 30s ease infinite',
-                'second': 'moveInCircle 20s reverse infinite',
-                'third': 'moveInCircle 40s linear infinite',
-                'fourth': 'moveHorizontal 40s ease infinite',
-                'fifth': 'moveInCircle 20s ease infinite',
+                first: 'moveVertical 30s ease infinite',
+                second: 'moveInCircle 20s reverse infinite',
+                third: 'moveInCircle 40s linear infinite',
+                fourth: 'moveHorizontal 40s ease infinite',
+                fifth: 'moveInCircle 20s ease infinite',
             },
         },
     },

@@ -28,13 +28,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="scroll-smooth">
-        {isSingleSection ?
-            <body
-                className={cn('antialiased', fontSans.variable)}
-            >
+        {isSingleSection ? (
+            <body className={cn('antialiased', fontSans.variable)}>
             <NewHome />
             </body>
-            :
+        ) : (
             <body
                 className={cn(
                     'relative bg-zinc-950 font-sans text-white antialiased',
@@ -47,7 +45,7 @@ export default function RootLayout({
             <SpeedInsights />
             <Analytics />
             </body>
-        }
+        )}
         </html>
     );
 }
