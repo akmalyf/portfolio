@@ -30,7 +30,7 @@ export default function RootLayout({
         <html lang="en" className="scroll-smooth">
         {isSingleSection ? (
             <body className={cn('antialiased', fontSans.variable)}>
-            <NewHome />
+                <NewHome />
             </body>
         ) : (
             <body
