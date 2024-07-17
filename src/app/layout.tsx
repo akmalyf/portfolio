@@ -31,6 +31,7 @@ export default function RootLayout({
         {isSingleSection ? (
             <body className={cn('antialiased', fontSans.variable)}>
                 <NewHome />
+                <SpeedInsights />
                 <Analytics />
             </body>
         ) : (
